@@ -2,7 +2,7 @@
     "use strict";
 
     // locals
-    var unwrap = ko.utils.unwrapObservable;
+    var unwrap = ko.unwrap;
 
     /**
     * initiate        
