@@ -38,3 +38,5 @@ function AppViewModel() {
 ko.applyBindings(new AppViewModel());
 
 ```
+
+See an example on [JSFiddle](https://jsfiddle.net/brechtb86/jskjdhqv/)
