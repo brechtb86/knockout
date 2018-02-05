@@ -14,7 +14,13 @@
     */
     function init(element, value, bindings) {
         var $el = $(element);
+        var model = value();
         var modelValue = unwrap(value());
+
+        if (model === null || typeof model === "undefined") {
+            throw new Error("Cannot bind highlight to undefined value. data-bind expression: " +
+                element.getAttribute("data-bind"));
+        }
 
         var text = modelValue.text || "";
         var keywords = modelValue.keywords || [0];

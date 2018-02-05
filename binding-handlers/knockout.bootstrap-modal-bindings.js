@@ -17,6 +17,11 @@
         var model = value();
         var modelValue = unwrap(value());
 
+        if (model === null || typeof model === "undefined") {
+            throw new Error("Cannot bind modal to undefined value. data-bind expression: " +
+                element.getAttribute("data-bind"));
+        }
+
         $el.modal({
             show: false
         });
