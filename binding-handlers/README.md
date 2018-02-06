@@ -1,8 +1,7 @@
 # Knockout binding handlers
 #### knockout.highlight-bindings.js
 
-
-A simple binding handler to highlight words in a text based on keywords.
+A binding handler to highlight words in a text based on keywords.
 
 Use it like this:
 
@@ -36,7 +35,6 @@ function AppViewModel() {
 }
  
 ko.applyBindings(new AppViewModel());
-
 ```
 
 See an example on [JSFiddle](https://jsfiddle.net/brechtb86/jskjdhqv/)
@@ -192,3 +190,72 @@ ko.applyBindings(new AppViewModel());
 ```
 
 See an example on [JSFiddle](https://jsfiddle.net/brechtb86/ofnsnfee/)
+
+#### knockout.froala-bindings.js
+
+A binding handler for the Froala wysiwyg editor ([website](http://www.froala.com/))
+
+Use it like this:
+
+```html
+<!--html-->
+<label>Froala editor:</label>
+<br/>
+<br/>
+<textarea data-bind="froala: text, froalaOptions: froalaOptions, disable: isDisabled"></textarea>
+<br/>
+<button type="button" data-bind="click: function() { isDisabled(!isDisabled()); }">
+Toggle enable/disable
+</button>
+<br/>
+<br/>
+  <label>Output:</label>
+<br/>
+<br/>
+<div data-bind="html: text">
+</div>
+```
+
+```javascript
+//javascript
+function AppViewModel() {
+  var self = this;
+
+  self.text = ko.observable();
+  self.isDisabled = ko.observable(false);
+
+  self.froalaOptions = ko.observable({
+    key: "",    
+    height: "200",
+    placeholderText: "Write something, it will appear underneat the editor.",
+    toolbarButtons: [
+      "bold",
+      "italic",
+      "underline",
+      "strikeThrough",
+      "subscript",
+      "superscript",
+      "|",
+      "color",
+      "|",
+      "paragraphFormat",
+      "align",
+      "formatOL",
+      "formatUL",
+      "outdent",
+      "indent",
+      "|",
+      "insertLink",
+      "-",
+      "undo",
+      "redo",
+      "clearFormatting",
+      "selectAll"
+    ]
+  });
+}
+
+ko.applyBindings(new AppViewModel());
+```
+
+See an example on [JSFiddle](https://jsfiddle.net/brechtb86/wjhn1ag1/)
