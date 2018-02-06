@@ -21,7 +21,7 @@ function AppViewModel() {
   self.name = ko.observable("Brecht");
   self.name.subscribeChanged(function(newValue, oldValue) {
     if (newValue != oldValue) {
-      alert("You changed your name to " + newValue);
+      alert("Hi " + oldValue + ", you changed your name to " + newValue);
     }
   });
 }
