@@ -86,7 +86,7 @@ function AppViewModel() {
 ko.applyBindings(new AppViewModel());
 ```
 
-See an example on [JSFiddle](https://jsfiddle.net/brechtb86/dnj1n1dg/3/)
+See an example on [JSFiddle](https://jsfiddle.net/brechtb86/dnj1n1dg/)
 
 #### knockout.drop-upload-bindings.js
 
