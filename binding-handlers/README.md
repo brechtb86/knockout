@@ -88,8 +88,106 @@ ko.applyBindings(new AppViewModel());
 
 See an example on [JSFiddle](https://jsfiddle.net/brechtb86/dnj1n1dg/3/)
 
+#### knockout.drop-upload-bindings.js
 
+A binding handler for a dropzone where you can drop files to upload.
 
+Use it like this:
 
+```css
+/*css*/
+.drop-zone {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+    height: 250px;
+    background-color: #eee;
+    border: 1px solid #222;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
 
+    .drop-zone.enter-drag {
+        border: 1px solid #078d13;
+        background-color: #6ca984;        
+    }
+    
+    .drop-zone.leave-drag {
+    
+    }
+```
+
+```html
+<!--html-->
+<label>Files:</label>
+<div class="drop-zone" data-bind="dropUpload: files" unselectable="on" onselectstart="return false;" onmousedown="return false;">
+  <label>Drag &amp; drop files or double click.</label>
+</div>
+
+<!-- ko if: files().length > 0 -->
+<label>Files waiting to be uploaded</label>
+<ul>
+  <!-- ko foreach: files -->
+  <li>
+    <b data-bind="text: name"></b>
+  </li>
+  <!-- /ko -->
+</ul>
+<button type="button" data-bind="click: function() { upload(files); }">
+  Upload!
+</button>
+<!-- /ko -->
+```
+
+```javascript
+//javascript
+function AppViewModel() {
+  var self = this;
+
+  self.files = ko.observableArray();
+  self.progress = ko.observable();
+  self.upload = function(files) {
+
+    alert("Your files are going to be uploaded!");
+
+    var formData = new FormData();
+
+    files().forEach(function(file) {
+      formData.append("files", file);
+    });
+
+    $.ajax({
+        url: "../api/upload",
+        type: "POST",
+        contentType: false,
+        data: formData,
+        dataType: "json",
+        cache: false,
+        processData: false,
+        async: false,
+        xhr: function() {
+          var xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress",
+            function(evt) {
+              if (evt.lengthComputable) {
+                var progress = Math.round((evt.loaded / evt.total) * 100);
+                self.progress(progress);
+              }
+            },
+            false);
+          return xhr;
+        }
+      })
+      .done(function(data, textStatus, jqXhr) {})
+      .fail(function(jqXhr, textStatus, errorThrown) {})
+      .always(function() {});
+  }
+}
+
+ko.applyBindings(new AppViewModel());
+```
 
