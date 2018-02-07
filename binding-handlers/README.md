@@ -138,6 +138,7 @@ Use it like this:
 <button type="button" data-bind="click: function() { upload(files); }">
   Upload!
 </button>
+<span data-bind="text: 'Progress: ' + progress() + '%'"></span>
 <!-- /ko -->
 ```
 
