@@ -148,7 +148,7 @@ function AppViewModel() {
   var self = this;
 
   self.files = ko.observableArray();
-  self.progress = ko.observable();
+  self.progress = ko.observable(0);
   self.upload = function(files) {
 
     alert("Your files are going to be uploaded!");
