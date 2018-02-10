@@ -24,7 +24,7 @@
         var model = value();
         var allBindings = unwrap(bindings());
         var options = ko.toJS(allBindings.froalaOptions);
-        var disable = allBindings.disable || false;
+        var disable = allBindings.disable || ko.observable(false);
 
         // initialize the editor
         $el.froalaEditor(options || {});
@@ -47,6 +47,12 @@
 
         // cleanup editor, when dom node is removed
         ko.utils.domNodeDisposal.addDisposeCallback(element, destroy(element));
+
+        if (disable()) {
+            $el.froalaEditor("edit.off");
+        } else {
+            $el.froalaEditor("edit.on");
+        }
 
         disable.subscribe(function(newValue) {
             if (newValue) {
