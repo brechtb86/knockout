@@ -2,7 +2,7 @@
 #### knockout.subscribe-changed.js
 
 
-A simple extension on subscribable to have the oldVanue and newValue as parameters.
+A simple extension on subscribable to have the oldValue and newValue as parameters.
 
 Use it like this:
 
